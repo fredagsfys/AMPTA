@@ -11,38 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129193356) do
+ActiveRecord::Schema.define(:version => 20130202202822) do
 
   create_table "projects", :force => true do |t|
-    t.string   "Name",        :limit => 50,  :null => false
-    t.string   "Description", :limit => 200
+    t.string   "name",        :limit => 40
+    t.string   "description", :limit => 150
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
 
   create_table "statuses", :force => true do |t|
-    t.string   "Status",     :limit => 40
+    t.string   "status",     :limit => 40
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
 
   create_table "tickets", :force => true do |t|
-    t.integer  "User_id"
-    t.integer  "Project_id"
-    t.integer  "Status_id"
-    t.string   "Name",        :limit => 20,  :null => false
-    t.string   "Description", :limit => 100, :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "project_id_id"
+    t.integer  "status_id_id"
+    t.integer  "user_id_id"
+    t.string   "name",          :limit => 40
+    t.string   "description",   :limit => 150
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "FirstName",  :limit => 20,                 :null => false
-    t.string   "LastName",   :limit => 20,                 :null => false
-    t.string   "Email",                    :default => "", :null => false
-    t.string   "Password",   :limit => 40,                 :null => false
+    t.string   "fname",      :limit => 20
+    t.string   "lname",      :limit => 40
+    t.string   "email",                    :default => "", :null => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
   end
+
+  create_table "users_projects", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
+  add_index "users_projects", ["user_id", "project_id"], :name => "index_users_projects_on_user_id_and_project_id"
 
 end

@@ -1,3 +1,5 @@
 class Project < ActiveRecord::Base
-  # attr_accessible :title, :body
+	attr_accessible :name, :description, :start_date, :end_date
+	
+	has_and_belongs_to_many :user
 end
