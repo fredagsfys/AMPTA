@@ -14,11 +14,19 @@
 ActiveRecord::Schema.define(:version => 20130202202822) do
 
   create_table "projects", :force => true do |t|
+    t.integer  "user_id"
     t.string   "name",        :limit => 40
     t.string   "description", :limit => 150
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
+  add_index "projects_users", ["user_id", "project_id"], :name => "index_projects_users_on_user_id_and_project_id"
 
   create_table "statuses", :force => true do |t|
     t.string   "status",     :limit => 40
@@ -40,15 +48,9 @@ ActiveRecord::Schema.define(:version => 20130202202822) do
     t.string   "fname",      :limit => 20
     t.string   "lname",      :limit => 40
     t.string   "email",                    :default => "", :null => false
+    t.string   "password",   :limit => 50
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
   end
-
-  create_table "users_projects", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "project_id"
-  end
-
-  add_index "users_projects", ["user_id", "project_id"], :name => "index_users_projects_on_user_id_and_project_id"
 
 end
