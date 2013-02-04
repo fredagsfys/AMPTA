@@ -1,0 +1,26 @@
+<section>
+	<%= form_for @ticket do |f| %>
+	  <% if @ticket.errors.any? %>
+	    <div class="error_messages">
+	      <h2>Form is invalid</h2>
+	      <ul>
+	        <% for message in @ticket.errors.full_messages %>
+	          <li><%= message %></li>
+	        <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	  	<h1>Skapa en ny ticket</h1>
+
+	    <%= f.label :name %>
+	    <%= f.text_field :name %>
+
+	    <%= f.label :description %>
+	    <%= f.text_area :description %>
+
+	    <%= f.collection_select :status_id, @status, :id, :status_name, :prompt => 
+	    "Select a status" %>
+
+	  	<%= f.submit %>
+	<% end %>
+</section>

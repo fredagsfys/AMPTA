@@ -1,0 +1,20 @@
+<h1><%= @project.name %></h1>
+
+<h4>Startdatum:</h4> <%= @project.start_date %>
+<h4>Slutdatum:</h4> <%= @project.start_date %>
+
+<h4>Användare</h4>
+<%= @owner.first_name %>
+
+<% @members.each do |u| %>
+ 	<%= u.first_name %>
+<% end %>
+
+<h4>Tickets:</h4>
+
+<%= link_to "Lägg till ny", new_ticket_path %>
+
+<%= submit_tag "Editera projektet", :class => "btn" %>
+<%= submit_tag "Ta bort projektet", :class => "btn" %>
+
+

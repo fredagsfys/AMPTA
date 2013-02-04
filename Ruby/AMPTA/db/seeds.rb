@@ -8,10 +8,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-u1 = User.create(:fname => "Haris", :lname => "Kljajic", :email => "haris.kljajic@hotmail.se", :password => "test123")
-u2 = User.create(:fname => "Annie", :lname => "Bäckström", :email => "annie.backstrom@hotmail.se", :password => "test123")
+#status1 = Status.create(:status_name => "Not started")
+#status2 = Status.create(:status_name => "In progress")
+#status2 = Status.create(:status_name => "Done")
 
-p1 = Project.create(:name => "AMPTA", :description => "hejhopp somethinglolol hehe")
+user1 = User.create(:first_name => "Oskar", :last_name => "Norling", :email => "oskar.norling@gmail.com", :password => "qwerty")
+user2 = User.create(:first_name => "William", :last_name => "Tombs", :email => "william.tombs@gmail.com", :password => "qwerty")
 
-u1.projects << p1
-u2.projects << p1
+#project1 = Project.create(:name => "Ampta", :description => "Uppgift i webbramverk", :start_date => "2013-02-03", :end_date => "2013-02-14", :owner_id => "1")
+
+#Project.first.users << user1
+#Project.first.users << user2
