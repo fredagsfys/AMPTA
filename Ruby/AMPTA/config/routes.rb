@@ -3,25 +3,24 @@ AMPTA::Application.routes.draw do
 get "log_out" => "sessions#destroy", :as => "log_out"
 get "log_in" => "sessions#new", :as => "log_in"
 get "sign_up" => "users#new", :as => "sign_up"
-
-get "projects/:id/tickets/new" => "tickets#new", :as => "new_ticket" 
-
-# CreateProject
-get "projects/new" => "create_project#new", :as => "create_project"
-#post "create_project#{create}"
-
-get "projects/:id" => "projects#show", :as => "myproject"
+get "projects/all" => "projects#all", :as => "all_projects"
 
 
+resources :sessions, :tickets
+
+resources :users do
+  resources :projects
+end
+
+resources :projects do
+  resources :tickets
+end
+
+resources :projects do
+  resources :users
+end
 
 root :to => "projects#index"
-#root :to => "users#new"
-
-resources :users
-resources :create_project
-resources :projects
-resources :sessions
-resources :tickets
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

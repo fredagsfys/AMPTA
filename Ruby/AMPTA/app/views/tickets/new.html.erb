@@ -1,5 +1,4 @@
 <section>
-	<%= form_for @ticket do |f| %>
 	  <% if @ticket.errors.any? %>
 	    <div class="error_messages">
 	      <h2>Form is invalid</h2>
@@ -10,8 +9,10 @@
 	      </ul>
 	    </div>
 	  <% end %>
+	  	<%= form_for @ticket, :url => project_tickets_path(@project) do |f| %>
 	  	<h1>Skapa en ny ticket</h1>
-
+	  	<%= f.hidden_field :project_id, :value => @project.id %>
+	  	<%= f.hidden_field :user_id, :value => current_user.id %>
 	    <%= f.label :name %>
 	    <%= f.text_field :name %>
 
