@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(:version => 20130201161203) do
 
   create_table "projects", :force => true do |t|
     t.integer  "user_id"
-    t.string   "name",        :limit => 40,  :null => false
+    t.string   "name",        :limit => 40
     t.text     "description", :limit => 300
-    t.datetime "start_date",                 :null => false
-    t.datetime "end_date",                   :null => false
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20130201161203) do
     t.string   "last_name",     :limit => 40
     t.string   "email",         :limit => 200, :default => "", :null => false
     t.string   "password",      :limit => 40
-    t.string   "password_salt"
     t.string   "password_hash"
+    t.string   "password_salt"
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
   end

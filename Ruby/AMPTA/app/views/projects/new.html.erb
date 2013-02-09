@@ -1,16 +1,18 @@
 <h4>Create a new project</h4>
 
 <%= form_for @project, :url => { :action => "create" } do |p| %>
-    <% if @project.errors.any? %>
-     <div class="error_messages">
-       <h4>Form is invalid</h4>
-       <ul>
-         <% for message in @project.errors.full_messages %>
-           <li><%= message %></li>
-         <% end %>
-       </ul>
-     </div>
-   <% end %>
+      
+  <% if @project.errors.any? %>
+    <div class="error_messages">
+      <h4>Form is invalid</h4>
+      <ul>
+        <% for msg in @project.errors.full_messages %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 	<legend>Please enter the information below</legend>
         <%= p.label :name %>
         <%= p.text_field :name %>
@@ -19,10 +21,10 @@
         <%= p.text_field :description %>
 
         <%= p.label :start_date %>
-        <%= p.date_select :start_date %>
+        <%= p.date_select :start_date, :start_year => 2013 %>
 
         <%= p.label :end_date %>
-        <%= p.date_select :end_date %>
+        <%= p.date_select :end_date, :start_year => 2013 %>
 
         <% @user.each do |u| %>
               <p>

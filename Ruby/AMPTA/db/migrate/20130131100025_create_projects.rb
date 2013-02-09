@@ -3,10 +3,10 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
     	t.references :user
 
-		  t.string :name, :limit => 40, :null => false
+		  t.string :name, :limit => 40
 		  t.text :description, :limit => 300
-		  t.datetime :start_date, :null => false
-		  t.datetime :end_date, :null => false
+		  t.datetime :start_date, :null => true
+		  t.datetime :end_date, :null => true
 
       t.timestamps
     end

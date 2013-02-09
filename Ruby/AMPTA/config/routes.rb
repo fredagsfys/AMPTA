@@ -5,6 +5,7 @@ get "log_in" => "sessions#new", :as => "log_in"
 get "sign_up" => "users#new", :as => "sign_up"
 get "projects/all" => "projects#all", :as => "all_projects"
 
+root :to => "projects#index"
 
 resources :sessions, :tickets
 
@@ -20,7 +21,7 @@ resources :projects do
   resources :users
 end
 
-root :to => "projects#index"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,2 +1,0 @@
-class CreateProjectController < ApplicationController
-end

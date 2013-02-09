@@ -28,20 +28,44 @@
 	<div class="row-fluid">
 	    <div class="span2">
 	      	<h6>Your projects</h6>
+	      	<!-- Check if there are any projects for the online user -->
+      		<% if user_projects.size > 0 %>
+      			<table>
+      				<tr>
 
-	      	<% if current_user %>
-		      	<% user_projects.each do |u| %>
-	              <p>
+  					<!-- Loop out the online users projects -->
+		      		<% user_projects.each do |u| %>
+					<td class="projectCell">
+	            		<%= link_to u.name, project_path(u.id) %>
+					</td>
+		      		<% if u.user_id == current_user.id %>
+		      			<td>
+							<span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
+						</td>
+		      		<% else %>
+		      			<td></td>
+		      		<% end %>
+        		<% end %>
 
-	                <%= link_to u.name, myproject_path(u.id) %>
-	              </p>
-	        	<% end %>
-        	<% else %>
-        		<p class="muted">Inga projekt ännu.</p>
-        	<% end %>
+        			</tr>
+				</table>
+			<% else %>
+				<p class="muted">You have no projects.</p>
+			<% end %>
 
       		<br />
 	      	<h6>Your last 10 tickets</h6>
+
+	      	<!-- Loop out the online users tickets if there is any -->
+	      	<% if user_projects.size > 0 %>
+	      		<% user_tickets.each do |u| %>
+					<p>
+	            		<%= link_to u.name, ticket_path(u.id) %> <!-- <span class="muted">(<%= @project.name %>)</span> -->
+					</p>
+        		<% end %>
+			<% else %>
+				<p class="muted">You have no tickets.</p>
+			<% end %>
 	    </div>
 	    <div class="span10">
 	      	<%= yield %>
@@ -49,9 +73,7 @@
 	</div>
 </div>
 <% else %>
- <%= yield %>
+	<%= yield %>
 <% end %>
-
-	
 </body>
 </html>

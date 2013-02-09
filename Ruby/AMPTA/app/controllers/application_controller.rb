@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :user_projects
+  helper_method :user_tickets
 
   private
 
@@ -15,5 +16,10 @@ class ApplicationController < ActionController::Base
 	def user_projects
     @projectLink = Project.where(:user_id => current_user.id)
 	end
+
+  def user_tickets
+    @project = Project.where(:user_id => current_user.id)
+    @ticketLink = Ticket.where(:project_id => @project)
+  end
 
 end

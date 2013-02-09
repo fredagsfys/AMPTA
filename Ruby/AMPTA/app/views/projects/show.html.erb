@@ -1,20 +1,30 @@
-<h1><%= @project.name %></h1>
 
-<h4>Startdatum:</h4> <%= @project.start_date %>
-<h4>Slutdatum:</h4> <%= @project.start_date %>
+<h4><%= @project.name %></h4>
 
-<h4>Användare</h4>
-<%= @owner.first_name %>
+<p><strong>Startdatum: </strong> <%= @project.start_date.strftime("%d.%m.%y %H:%M") %> </p>
+<p><strong>Slutdatum: </strong> <%= @project.end_date.to_formatted_s(:use_month_numbers ) %> </p>
+
+<P><strong>Project owner: </strong> <%= @owner.first_name %> <%= @owner.last_name %></p>
+
+<strong>
+	Medlemmar: 
+</strong>
 
 <% @members.each do |u| %>
- 	<%= u.first_name %>
+	<span>
+		<%= u.first_name %> <%= u.last_name %>,
+	</span>
 <% end %>
 
-<h4>Tickets:</h4>
+<br />
+<br />
+<strong>Tickets: </strong>
+<span>
+	<%= @tickets.name %>
+</span>
 
-<%= link_to "Lägg till ny", new_project_ticket_path(@project) %>
-
-<%= submit_tag "Editera projektet", :class => "btn" %>
-<%= submit_tag "Ta bort projektet", :class => "btn" %>
+<br />
+<br />
+<%= link_to "New ticket", new_project_ticket_path(@project) %>
 
 

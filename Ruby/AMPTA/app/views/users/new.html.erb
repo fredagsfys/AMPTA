@@ -1,8 +1,9 @@
 <section>
 	<%= form_for @user do |f| %>
+
 	  <% if @user.errors.any? %>
 	    <div class="error_messages">
-	      <h2>Form is invalid</h2>
+	      <h4>Form is invalid</h4>
 	      <ul>
 	        <% for message in @user.errors.full_messages %>
 	          <li><%= message %></li>
@@ -10,6 +11,8 @@
 	      </ul>
 	    </div>
 	  <% end %>
+	  
+		<legend>Create AMPTA account</legend>
 	    <%= f.label :first_name %>
 	    <%= f.text_field :first_name %>
 
@@ -25,6 +28,6 @@
 	    <%= f.label :password_confirmation %>
 	    <%= f.password_field :password_confirmation %>
 
-	  	<%= f.submit %>
+	  	<%= f.submit "Create", :class => "btn" %> 
 	<% end %>
 </section>

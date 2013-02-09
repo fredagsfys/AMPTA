@@ -1,11 +1,12 @@
 <section>
 	<%= form_tag sessions_path do %>
 		<legend>Sign in to AMPTA</legend>
-            <%= label_tag :email %>
-            <%= text_field_tag :email %>
-            <%= label_tag :password %>
-            <%= password_field_tag :password %>
-        	<%= submit_tag "Login", :class => "btn" %>
+        <%= label_tag :email %>
+        <%= text_field_tag :email %>
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+    	<%= submit_tag "Login", :class => "btn" %> 
+    	<span>or</span>
+		<%= link_to "Sign up", sign_up_path %>
 	<% end %>
-	<%= link_to "Sign up", sign_up_path %>
 </section>

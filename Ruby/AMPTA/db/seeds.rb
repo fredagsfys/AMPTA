@@ -12,8 +12,8 @@
 #status2 = Status.create(:status_name => "In progress")
 #status2 = Status.create(:status_name => "Done")
 
-user1 = User.create(:first_name => "Oskar", :last_name => "Norling", :email => "oskar.norling@gmail.com", :password => "qwerty")
-user2 = User.create(:first_name => "William", :last_name => "Tombs", :email => "william.tombs@gmail.com", :password => "qwerty")
+#user1 = User.create(:first_name => "Oskar", :last_name => "Norling", :email => "oskar.norling@gmail.com", :password => "qwerty")
+#user2 = User.create(:first_name => "William", :last_name => "Tombs", :email => "william.tombs@gmail.com", :password => "qwerty")
 
 #project1 = Project.create(:name => "Ampta", :description => "Uppgift i webbramverk", :start_date => "2013-02-03", :end_date => "2013-02-14", :owner_id => "1")
 
