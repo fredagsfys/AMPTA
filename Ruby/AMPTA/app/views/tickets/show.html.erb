@@ -1,0 +1,9 @@
+<h1><%= @ticket.name %></h1>
+
+<p><%= @ticket.description %></p>
+<p>Created at:<%= @ticket.created_at %></p>
+<p>Last edited: <%= @ticket.updated_at %></p>
+
+<p><%= link_to "Edit", edit_ticket_path(@ticket.id) %></p>
+<p><%= link_to "Delete", ticket_path(@ticket.id), :method => :destroy %></p>
+

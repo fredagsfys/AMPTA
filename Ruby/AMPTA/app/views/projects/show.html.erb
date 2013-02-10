@@ -25,6 +25,9 @@
 
 <br />
 <br />
+<p><%= link_to "Edit project", edit_project_path(@project) %></p>
+<p><%= link_to "Delete project", project_path(@project), :method => :destroy %></p>
 <%= link_to "New ticket", new_project_ticket_path(@project) %>
+
 
 

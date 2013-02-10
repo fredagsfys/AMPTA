@@ -3,13 +3,12 @@ class Project < ActiveRecord::Base
 
   	has_and_belongs_to_many :users
 
-	# Custom validations (behövs ej)
- #  	validates :name,
-	#           :presence => {:msg => "Pleae, enter a name to your project."},
-	#           :length => {:minimum => 2, :msg => "The name must contain at least 2 characters, max 40."}
+  	validates :name,
+	          :presence => {:msg => "Pleae, enter a name to your project."},
+	          :length => {:minimum => 2, :msg => "The name must contain at least 2 characters, max 40."}
 
-	# validates :description,
-	#           :presence => {:msg => "Pleae, enter a description to your project."},
-	#           :length => {:minimum => 2, :msg => "The description must contain at least 2 characters, max 40."}
+	validates :description,
+	          :presence => {:msg => "Pleae, enter a description to your project."},
+	          :length => {:minimum => 2, :msg => "The description must contain at least 2 characters, max 40."}
   
 end

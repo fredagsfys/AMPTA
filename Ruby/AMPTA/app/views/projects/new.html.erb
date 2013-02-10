@@ -29,7 +29,7 @@
         <% @user.each do |u| %>
               <p>
                 <%= check_box_tag 'chosen_userids[]', u.id -%>
-                <%= u.first_name -%>
+                <%= u.first_name%> <%= u.last_name%>
               </p>
         <% end %>
 

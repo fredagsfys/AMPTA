@@ -60,7 +60,7 @@
 	      	<% if user_projects.size > 0 %>
 	      		<% user_tickets.each do |u| %>
 					<p>
-	            		<%= link_to u.name, ticket_path(u.id) %> <!-- <span class="muted">(<%= @project.name %>)</span> -->
+	            		<%= link_to u.name, ticket_path(u.id) %>
 					</p>
         		<% end %>
 			<% else %>

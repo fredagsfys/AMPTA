@@ -49,9 +49,11 @@ class ProjectsController < ApplicationController
 			# Set the owner of the project to the creator
 			@project.user_id = current_user.id
 
-			# Add to relational table projects_users
-			@users.each_with_index  do |data, index|
-			  	@project.users << User.find(@users[index])
+			if !@users.blank?
+				# Add to relational table projects_users
+				@users.each_with_index  do |data, index|
+				  	@project.users << User.find(@users[index])
+				end
 			end
 
 		if @project.save
@@ -60,4 +62,36 @@ class ProjectsController < ApplicationController
 			render :action => "new"
 		end
 	end
+
+	def edit
+  		@project = Project.find_by_id(params[:id])
+  		@members = @project.users.all
+  		@users = User.all
+
+    end
+
+	def update
+	    @user = Project.find(params[:id])
+	    @users = params[:chosen_userids]
+
+	    if current_user.id == @user.user_id
+	      @project = Project.find(params[:id])
+
+	      @project.users.delete_all
+
+	     if @users
+	      @users.each_with_index  do |data, index|
+	         @project.users << User.find(@users[index])
+	     end
+	     end
+
+	     if @project.update_attributes(params[:project])
+	      redirect_to projects_path
+	     else
+	      render :action => :edit
+	     end
+	    else
+	      redirect_to projects_path
+	    end
+	  end
 end

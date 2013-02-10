@@ -1,0 +1,25 @@
+<h4>Editing <%= @ticket.name %></h4>
+
+<%= form_for @ticket, :url => ticket_path(@ticket)  do |p| %>
+      
+  <% if @ticket.errors.any? %>
+    <div class="error_messages">
+      <h4>Form is invalid</h4>
+      <ul>
+        <% for msg in @ticket.errors.full_messages %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<legend>Please enter the information below</legend>
+
+        <%= p.label :name %>
+        <%= p.text_field :name %>
+
+        <%= p.label :description %>
+        <%= p.text_field :description %>
+
+    	<%= p.submit "Save changes", :class => "btn" %>
+<% end %>
