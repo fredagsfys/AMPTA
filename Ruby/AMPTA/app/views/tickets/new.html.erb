@@ -14,6 +14,7 @@
 	  <% end %>
 
 	<legend>Please enter the information below</legend>
+	
 	<%= t.hidden_field :project_id, :value => @project.id %>
 	<%= t.hidden_field :user_id, :value => current_user.id %>
 
@@ -26,6 +27,6 @@
 	<br />
 	<%= t.collection_select :status_id, @status, :id, :status_name, :prompt => "Select a status" %>
 	<br />
-	<%= t.submit "Create ticket", :class => "btn" %>
+	<%= t.submit "Create ticket", :class => "btn btn-success" %>
 <% end %>
 <!-- </section> -->

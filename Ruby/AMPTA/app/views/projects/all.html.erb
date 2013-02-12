@@ -5,27 +5,45 @@
 	<% @projects.each do |p| %>
 		<tr class="projectRow">			
 
-				<!-- If online user are a member -->
-				<% if p.users.include?(current_user) %>
-					<td class="projectCell">
+
+
+		<!-- If online user are admin -->
+
+
+			<% if p.user_id == current_user.id && p.users.include?(current_user) %>
+				<td class="projectCell">
 						<%= link_to p.name, project_path(p.id) %>
-					</td>
+				</td>
+				<td>
+					<span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
+				</td>
+				<td>
+					<span class="memberProject"><i class="icon-ok-sign"></i>Member</span>
+				</td>
 
-					<td>
-						<span class="memberProject"><i class="icon-ok-sign"></i>Member</span>
-					</td>
+			<% elsif p.user_id == current_user.id %>
+				<td class="projectCell">
+						<%= link_to p.name, project_path(p.id) %>
+				</td>
+				<td>
+					<span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
+				</td>				
 
-					<!-- If online user are admin -->
-					<% if p.user_id == current_user.id %>
-						<td>
-							<span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
-						</td>
-					<% end %>
+			<% elsif  p.users.include?(current_user) %>
+				<td class="projectCell">
+					<%= link_to p.name, project_path(p.id) %>
+				</td>
 
-
+				<td>
+					<span class="memberProject"><i class="icon-ok-sign"></i>Member</span>
+				</td>
+					
 			<% else %>
 				<td class="projectCell">
 					<span class="muted"><%= p.name %></span>
+				</td>
+				<td>
+					<span class="noProject"><i class="icon-remove-circle"></i>Not authorized</span>
 				</td>
 			<% end %>
 
@@ -34,5 +52,5 @@
 	<% end %>
 	</table>
 <% else %>
-	<p class="muted">Sorry, there are no projects created yes.</p>
+	<p class="muted">Sorry, there are no projects created yet.</p>
 <% end %>

@@ -4,6 +4,16 @@
 <p>Created at:<%= @ticket.created_at %></p>
 <p>Last edited: <%= @ticket.updated_at %></p>
 
-<p><%= link_to "Edit", edit_ticket_path(@ticket.id) %></p>
-<p><%= link_to "Delete", ticket_path(@ticket.id), :method => :destroy %></p>
-
+<div class="input-append">
+  <div class="btn-group">
+    <button class="btn dropdown-toggle btn-inverse dropproject" data-toggle="dropdown">
+      Ticket options
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Edit ticket", edit_ticket_path(@ticket.id) %></li>
+      <li><%= link_to "Delete ticket", ticket_path(@ticket.id), :confirm => 'Are you sure?', :method => :delete %></li>
+    </ul>
+  </div>
+  
+</div>

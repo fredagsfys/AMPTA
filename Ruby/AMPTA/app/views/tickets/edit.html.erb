@@ -12,14 +12,11 @@
       </ul>
     </div>
   <% end %>
-
-	<legend>Please enter the information below</legend>
-
         <%= p.label :name %>
         <%= p.text_field :name %>
 
         <%= p.label :description %>
         <%= p.text_field :description %>
-
-    	<%= p.submit "Save changes", :class => "btn" %>
+        <p></p>
+    	<%= p.submit "Save changes", :class => "btn btn-warning" %>
 <% end %>

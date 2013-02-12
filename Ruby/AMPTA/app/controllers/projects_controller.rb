@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
 		@project = Project.find_by_id(params[:id])
 		@owner = User.find(@project.user_id)
 		@members = Project.find_by_id(params[:id]).users
-		@tickets = Ticket.where(:project_id => @project)
+		@tickets = Ticket.where(@project.id)
 		#@tickets = Ticket.all
 	end
 
@@ -86,7 +86,7 @@ class ProjectsController < ApplicationController
 	     end
 
 	     if @project.update_attributes(params[:project])
-	      redirect_to projects_path
+	      redirect_to project_path
 	     else
 	      render :action => :edit
 	     end
@@ -94,4 +94,17 @@ class ProjectsController < ApplicationController
 	      redirect_to projects_path
 	    end
 	  end
+
+	def destroy
+	  @user = Project.find(params[:id])
+	  if current_user.id == @user.user_id
+	   @project = Project.find(params[:id])
+	   @project.destroy
+	   redirect_to projects_path
+	  else
+	   redirect_to projects_path
+	  end
+    end
+
+
 end

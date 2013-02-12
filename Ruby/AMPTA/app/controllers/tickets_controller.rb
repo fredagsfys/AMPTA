@@ -28,24 +28,26 @@ class TicketsController < ApplicationController
   end
 
   def update
-	@ticket = Ticket.find(params[:id])
+  	@ticket = Ticket.find(params[:id])
 
-	if @ticket.update_attributes(params[:ticket])
-		redirect_to ticket_path(@ticket), :notice => "Ticket updated!"
-    else
-		render "new"
-	end
-  end
-
-  def destroy
-
-  	@ticket = Ticket.find_by_id(params[:id])
-
-  	if Ticket.destroy(@ticket)
-  		redirect_to tickets_path, :notice => "Ticket deleted!"
-  	else
-  		redirect_to ticket_path(@ticket.id) :notice => "Failed to delete ticket!"
+  	if @ticket.update_attributes(params[:ticket])
+  		redirect_to ticket_path(@ticket), :notice => "Ticket updated!"
+      else
+  		render "new"
   	end
   end
+
+   def destroy
+  @user = Ticket.find(params[:id])
+  if current_user.id == @user.user_id
+   @ticket = Ticket.find(params[:id])
+   @ticket.destroy
+   redirect_to projects_path
+  else
+   redirect_to projects_path
+  end
+ end
+
+
   
 end

@@ -2,11 +2,12 @@
 	<%= form_tag sessions_path do %>
 		<legend>Sign in to AMPTA</legend>
         <%= label_tag :email %>
-        <%= text_field_tag :email %>
+        <%= text_field_tag :email, "", :class => "input-block-level" %>
         <%= label_tag :password %>
-        <%= password_field_tag :password %>
-    	<%= submit_tag "Login", :class => "btn" %> 
-    	<span>or</span>
-		<%= link_to "Sign up", sign_up_path %>
+        <%= password_field_tag :password, "", :class => "input-block-level" %>
+    	<%= submit_tag "Login", :class => "btn loginbutt" %> 
+    	<span></span>
+		<%= link_to "Sign up", sign_up_path, :class => "btn btn-inverse" %>
 	<% end %>
 </section>
+

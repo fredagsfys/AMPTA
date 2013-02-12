@@ -7,7 +7,7 @@ get "projects/all" => "projects#all", :as => "all_projects"
 
 root :to => "projects#index"
 
-resources :sessions, :tickets
+resources :sessions, :tickets, :search
 
 resources :users do
   resources :projects

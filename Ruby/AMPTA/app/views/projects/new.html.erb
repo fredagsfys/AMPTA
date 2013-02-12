@@ -13,25 +13,34 @@
     </div>
   <% end %>
 
-	<legend>Please enter the information below</legend>
-        <%= p.label :name %>
+        <legend>Whats the projects name?</legend>
         <%= p.text_field :name %>
 
-        <%= p.label :description %>
+        <legend>Describe the project</legend>
         <%= p.text_field :description %>
 
-        <%= p.label :start_date %>
+        <legend>When does the project start?</legend>
         <%= p.date_select :start_date, :start_year => 2013 %>
 
-        <%= p.label :end_date %>
+        <legend>When does it end?</legend>
         <%= p.date_select :end_date, :start_year => 2013 %>
 
+  <div class="input-append">
+    <div class="btn-group">
+      <button class="btn dropdown-toggle btn-inverse dropproject" data-toggle="dropdown">
+        Choose members
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
         <% @user.each do |u| %>
-              <p>
-                <%= check_box_tag 'chosen_userids[]', u.id -%>
-                <%= u.first_name%> <%= u.last_name%>
-              </p>
+              <li>
+                <%= check_box_tag 'chosen_userids[]', u.id%> <%= u.first_name%> <%= u.last_name%>
+              </li>
         <% end %>
+      </ul>
+      <%= p.submit "Skapa project", :class => "btn btn-success" %>
+    </div>
+  </div>
 
-    	<%= p.submit "Skapa project", :class => "btn" %>
+    
 <% end %>
