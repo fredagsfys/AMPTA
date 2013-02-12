@@ -1,0 +1,7 @@
+<form class="navbar-form pull-right">
+<%= form_tag :controller => :projects, :action => :all, :method => :get do %>
+  <%= text_field_tag :search, params[:search], :class => "span8", :placeholder => "Search to filter" %>
+  <%= submit_tag "Search", :name => :nil, :class => "btn btn-success" %>
+<% end %>
+</form>
+

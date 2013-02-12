@@ -1,46 +1,39 @@
 class ProjectsController < ApplicationController
+	before_filter :confirm_logged_in, :except => [:session]
 
 	def index
-		if !current_user
-			redirect_to log_in_path
-		end
+	  if !current_user
+	   redirect_to log_in_path
+	  end
 	end
 
 	def show
-		if !current_user
-			redirect_to log_in_path
-		end
 		@project = Project.find_by_id(params[:id])
 		@owner = User.find(@project.user_id)
 		@members = Project.find_by_id(params[:id]).users
-		@tickets = Ticket.where(@project.id)
-		#@tickets = Ticket.all
+		
+		if !@members.include?(current_user) && @owner.id != current_user.id
+	   		redirect_to projects_path
+	  	end
+		
+		@tickets = Ticket.where(:project_id => @project)
 	end
 
 	def all
-		if !current_user
-			redirect_to log_in_path
-		end
-		@projects = Project.all
+		@projects = Project.search(params[:search])
 
 		@projects.each_with_index  do |data, index|
-		  	#@project.users << User.find(@users[index])
+
 			@members = @projects[index].users
 		end
 	end
 
 	def new
-		if !current_user
-			redirect_to log_in_path
-		end
 			@user = User.all
 			@project = Project.new
 	end
 
 	def create
-		if !current_user
-			redirect_to log_in_path
-		end
 			# New Project object with params sent from view
 			@project = Project.new(params[:project])
 
@@ -64,13 +57,29 @@ class ProjectsController < ApplicationController
 	end
 
 	def edit
-  		@project = Project.find_by_id(params[:id])
-  		@members = @project.users.all
-  		@users = User.all
+		@project = Project.find_by_id(params[:id])
+		@owner = User.find(@project.user_id)
 
-    end
+		if @owner.id != current_user.id
+	   		redirect_to projects_path
+	  	end
+
+		@project = Project.find_by_id(params[:id])
+		@members = @project.users.all
+		@users = User.all
+
+	end
 
 	def update
+		@project = Project.find_by_id(params[:id])
+		@owner = User.find(@project.user_id)
+		@members = Project.find_by_id(params[:id]).users
+
+		if @owner.id != current_user.id
+	   		redirect_to projects_path
+	  	end
+
+
 	    @user = Project.find(params[:id])
 	    @users = params[:chosen_userids]
 
@@ -96,15 +105,15 @@ class ProjectsController < ApplicationController
 	  end
 
 	def destroy
-	  @user = Project.find(params[:id])
-	  if current_user.id == @user.user_id
-	   @project = Project.find(params[:id])
-	   @project.destroy
-	   redirect_to projects_path
-	  else
-	   redirect_to projects_path
-	  end
-    end
+	    
+	    @user = Project.find(params[:id])
 
-
+	    if current_user.id == @user.user_id
+		    @project = Project.find(params[:id])
+		    @project.destroy
+		    redirect_to all_projects_path
+	    else
+	    	redirect_to all_projects_path
+	    end
+	end
 end

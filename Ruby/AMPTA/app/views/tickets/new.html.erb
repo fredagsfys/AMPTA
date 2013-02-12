@@ -1,31 +1,32 @@
 <h4>Create a ticket</h4>
+
+<% if @ticket.errors.any? %>
+	<div class="error_messages">
+		<h4>Form is invalid</h4>
+		<ul>
+			<% @ticket.errors.full_messages.each do |msg| %>
+		    	<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
 <!-- <section class="siteForms"> -->
 <%= form_for @ticket, :url => project_tickets_path(@project)  do |t| %>
       
-	  <% if @ticket.errors.any? %>
-	    <div class="error_messages">
-	      <h4>Form is invalid</h4>
-	      <ul>
-	        <% for msg in @ticket.errors.full_messages %>
-	          <li><%= msg %></li>
-	        <% end %>
-	      </ul>
-	    </div>
-	  <% end %>
-
 	<legend>Please enter the information below</legend>
 	
 	<%= t.hidden_field :project_id, :value => @project.id %>
 	<%= t.hidden_field :user_id, :value => current_user.id %>
 
 	<%= t.label :name %>
-	<%= t.text_field :name, :placeholder => "Eg. Create a ticket..." %>
+	<%= t.text_field :name, :placeholder => "Tickets name..." %>
 
 	<%= t.label :description %>
-	<%= t.text_area :description, :size => "10x10", :placeholder => "Eg. Trying to create a ticket..." %>
+	<%= t.text_area :description, :size => "10x10", :placeholder => "Describe the ticket..." %>
 
 	<br />
-	<%= t.collection_select :status_id, @status, :id, :status_name, :prompt => "Select a status" %>
+	<%= t.collection_select :status_id, @status, :id, :status_name %>
 	<br />
 	<%= t.submit "Create ticket", :class => "btn btn-success" %>
 <% end %>

@@ -1,0 +1,5 @@
+<ul>
+  <% @projects.each do |p| %>
+  	<li><%= link_to p.name, project_path(p.id), :action => 'show', :id => p.id  %></li>
+  <% end %>
+</ul>

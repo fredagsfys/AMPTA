@@ -1,9 +1,9 @@
 <h1><%= @ticket.name %></h1>
 
-<p><%= @ticket.description %></p>
-<p>Created at:<%= @ticket.created_at %></p>
-<p>Last edited: <%= @ticket.updated_at %></p>
-
+<p><bold>Description: </bold><span><%= @ticket.description %></span></p>
+<p><bold>Created at: </bold><span><%= @ticket.created_at.strftime("%d.%m.%y %H:%M ") %></span></p>
+<p><bold>Last edited: </bold><span> <%= @ticket.updated_at.strftime("%d.%m.%y %H:%M ") %></span></p>
+<p><bold>Status: </bold><span> <%= @status.status_name %></span></p>
 <div class="input-append">
   <div class="btn-group">
     <button class="btn dropdown-toggle btn-inverse dropproject" data-toggle="dropdown">

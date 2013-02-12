@@ -62,34 +62,22 @@
 
 		<% if current_user %>
 		<div class="container-fluid">
-      <div class="nav-collapse collapse">
-        <form class="navbar-form pull-right">
-        <%= form_tag do %>
-          <%= text_field_tag :search, params[:search], :class => "span2", :placeholder => "Search project" %>
-          <%= submit_tag "Search", :name => :nil, :class => "btn btn-success" %>
-        <% end %>
-        </form>
-
-      </div>
-
 			<div class="row-fluid">
 			    <div class="span3">
 			      	<h4>Your projects</h4>
 			      	<!-- Check if there are any projects for the online user -->
 		      		<% if user_projects.size > 0 %>
 		      			<table>
-		      				
-
 		  					<!-- Loop out the online users projects -->
 				      		<% user_projects.each do |u| %>
-                  <tr>
-  							<td class="projectCell">
-  			            		<%= link_to u.name, project_path(u.id) %>
-  							</td>
-				      		<% if u.user_id == current_user.id %>
-				      			<td>
-									<span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
-								</td>
+                    <tr>
+        							<td class="projectCell">
+        			            		<%= link_to u.name, project_path(u.id) %>
+        							</td>
+				      		    <% if u.user_id == current_user.id %>
+				      			  <td>
+									     <span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
+								      </td>
 				      		<% else %>
 				      			<td></td>
 				      		<% end %>
@@ -106,11 +94,11 @@
 			      	<h6>Your last 10 tickets</h6>
 
 			      	<!-- Loop out the online users tickets if there is any -->
-			      	<% if user_projects.size > 0 %>
+			      	<% if user_tickets.size > 0 %>
 			      		<% user_tickets.each do |u| %>
-							<p>
-			            		<%= link_to u.name, ticket_path(u.id) %>
-							</p>
+  							<p>
+  			         <%= link_to u.name, ticket_path(u.id) %>
+  							</p>
 		        		<% end %>
 					<% else %>
 						<p class="muted">You have no tickets.</p>

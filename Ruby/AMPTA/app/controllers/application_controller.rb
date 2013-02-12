@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :user_projects
   helper_method :user_tickets
+  helper_method :confirm_logged_in
 
   private
 
@@ -18,8 +19,16 @@ class ApplicationController < ActionController::Base
 	end
 
   def user_tickets
-    @project = Project.where(:user_id => current_user.id)
-    @ticketLink = Ticket.where(:project_id => @project)
+    @ticketLink = Ticket.where(:user_id => current_user.id)
+  end
+
+  def confirm_logged_in
+    unless session[:user_id]
+      redirect_to log_in_path
+      return false
+    else
+      return true
+    end
   end
 
 end
