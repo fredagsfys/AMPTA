@@ -1,10 +1,12 @@
+<% @user = User.all %>
+
 <h4>Create a new project</h4>
 
 <%= form_for @project, :url => { :action => "create" } do |p| %>
       
   <% if @project.errors.any? %>
     <div class="error_messages">
-      <h4>Form is invalid</h4>
+      <h4>Error occured - please correct and try again.</h4>
       <ul>
         <% for msg in @project.errors.full_messages %>
           <li><%= msg %></li>
@@ -13,16 +15,16 @@
     </div>
   <% end %>
 
-        <legend>Whats the projects name?</legend>
-        <%= p.text_field :name %>
+        <%= p.label :name %>
+        <%= p.text_field :name, :placeholder => "Project name..." %>
 
-        <legend>Describe the project</legend>
-        <%= p.text_field :description %>
+        <%= p.label :description %>
+        <%= p.text_area :description, :size => "10x10", :placeholder => "Describe the project..." %>
 
-        <legend>When does the project start?</legend>
+        <%= p.label :start_date %>
         <%= p.date_select :start_date, :start_year => 2013 %>
 
-        <legend>When does it end?</legend>
+        <%= p.label :end_date %>
         <%= p.date_select :end_date, :start_year => 2013 %>
 
   <div class="input-append">

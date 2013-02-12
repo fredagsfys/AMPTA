@@ -1,8 +1,10 @@
+<% @status = Status.all %>
+
 <h4>Create a ticket</h4>
 
 <% if @ticket.errors.any? %>
 	<div class="error_messages">
-		<h4>Form is invalid</h4>
+		<h4>Error occured - please correct and try again.</h4>
 		<ul>
 			<% @ticket.errors.full_messages.each do |msg| %>
 		    	<li><%= msg %></li>

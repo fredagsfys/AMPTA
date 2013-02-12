@@ -1,10 +1,12 @@
+<% @status = Status.all %>
+
 <h4>Editing <%= @ticket.name %></h4>
 
 <%= form_for @ticket, :url => ticket_path(@ticket)  do |p| %>
       
   <% if @ticket.errors.any? %>
     <div class="error_messages">
-      <h4>Form is invalid</h4>
+      <h4>Error occured - please correct and try again.</h4>
       <ul>
         <% for msg in @ticket.errors.full_messages %>
           <li><%= msg %></li>
@@ -16,11 +18,11 @@
         <%= p.text_field :name %>
 
         <%= p.label :description %>
-        <%= p.text_field :description %>
+        <%= p.text_area :description, :size => "10x10" %>
         
         <br />
         <%= p.label :status %>
         <%= p.collection_select :status_id, @status, :id, :status_name %>
         <br />
-    	<%= p.submit "Save changes", :class => "btn btn-warning" %>
+      <%= p.submit "Save changes", :class => "btn btn-warning" %>
 <% end %>
