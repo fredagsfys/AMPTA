@@ -4,6 +4,11 @@
 
 <h4>All projects</h4>
 
+<p></p>
+<div id="notice"><%= flash[:notice] %></div>
+<div id="enotice"><%= flash[:enotice] %></div>
+<p></p>
+
 <% if @projects.size > 0 %>
 	<table>
 	<% @projects.each do |p| %>

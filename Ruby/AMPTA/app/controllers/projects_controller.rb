@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
 		@members = Project.find_by_id(params[:id]).users
 		
 		if !@members.include?(current_user) && @owner.id != current_user.id
-	   		redirect_to projects_path
+	   		redirect_to all_projects_path, :flash => { :enotice => "You are not a member nor owner of this project!" } 
 	  	end
 		
 		@tickets = Ticket.where(:project_id => @project)
@@ -61,7 +61,7 @@ class ProjectsController < ApplicationController
 		@owner = User.find(@project.user_id)
 
 		if @owner.id != current_user.id
-	   		redirect_to projects_path
+	   		redirect_to all_projects_path, :flash => { :enotice => "You are not a member nor owner of this project!" }
 	  	end
 
 		@project = Project.find_by_id(params[:id])
@@ -76,7 +76,7 @@ class ProjectsController < ApplicationController
 		@members = Project.find_by_id(params[:id]).users
 
 		if @owner.id != current_user.id
-	   		redirect_to projects_path
+	   		redirect_to all_projects_path, :flash => { :enotice => "You are not a member nor owner of this project!" }
 	  	end
 
 
@@ -95,12 +95,12 @@ class ProjectsController < ApplicationController
 	     end
 
 	     if @project.update_attributes(params[:project])
-	      redirect_to project_path
+	      redirect_to project_path, :notice => "Project was succefully updated!"
 	     else
 	      render :action => :edit
 	     end
 	    else
-	      redirect_to projects_path
+	      redirect_to all_projects_path, :flash => { :enotice =>  "Error - Project was not updated!" }
 	    end
 	  end
 
@@ -111,9 +111,9 @@ class ProjectsController < ApplicationController
 	    if current_user.id == @user.user_id
 		    @project = Project.find(params[:id])
 		    @project.destroy
-		    redirect_to all_projects_path
+		    redirect_to all_projects_path, :notice => "Project was succefully removed!"
 	    else
-	    	redirect_to all_projects_path
+	    	redirect_to all_projects_path, :flash => { :enotice => "Error - Project was not removed!" }
 	    end
 	end
 end

@@ -1,7 +1,9 @@
 
 <h4><%= @project.name %></h4>
-<br />
-<br />
+<p></p>
+<div id="notice"><%= flash[:notice] %></div>
+<div id="enotice"><%= flash[:enotice] %></div>
+<p></p>
 <p><strong>Start date: </strong><span> <%= @project.start_date.strftime("%d.%m.%y %H:%M ") %></span><strong>Deadline: </strong><span> <%= @project.end_date.strftime("%d.%m.%y %H:%M ") %> </span></p>
 <br />
 <p><strong>Descripion:</strong><span> <%= @project.description %> </span></p>
