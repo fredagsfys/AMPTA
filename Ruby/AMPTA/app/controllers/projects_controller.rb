@@ -22,9 +22,9 @@ class ProjectsController < ApplicationController
 	def all
 		@projects = Project.search(params[:search])
 
-		@projects.each_with_index  do |data, index|
+		@projects.each  do |p|
 
-			@members = @projects[index].users
+			@members = p.users
 		end
 	end
 
