@@ -1,0 +1,132 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}
+            AMPTA
+        {% endblock %}
+    </title>
+    {% block stylesheet %}
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css">
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap/css/bootstrap-responsive.css">
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap/css/bootstrap-responsive.min.css">
+    {% endblock %}
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+
+  </head>
+
+  <body>
+{% if user.is_authenticated %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Django Project</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="{% url home %}">Home</a></li>
+              <li><a href="{% url project_list %}">All projects</a></li>
+              <li><a href="{% url project_add %}">Create project</a></li>
+            </ul>
+            <form class="navbar-form pull-right">
+                <a href="{% url logout_user %}" class="btn btn-danger">Logout</a>
+            </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+{% endif %}
+
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row-fluid">
+              {% if user.is_authenticated %}
+                <div class="span3">
+                    <h4>Your projects</h4>
+                    {% with user|projects_for_owner as p %}
+                      <table>
+                        {% if p.count > 0 %}
+                          {% for project in p %}
+                          
+                          <tr>
+                             <td>
+                              <a href="{% url project_list_with_ticket project.id %}">{{ project.name }}</a>
+                             </td>
+                             <td>
+                              <span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
+                            </td>
+                          </tr>
+
+                          {% endfor %}
+                        {% else %}
+                          <td>
+                            <p class="muted">You have no projects.</p>
+                          </td>
+
+                        {% endif %}
+                      </table>
+                    {% endwith %}
+                    <br />
+                    <h6>Your last 10 tickets</h6>
+                    {% with user|tickets_for_owner as p %}
+                      {% if p.count > 0 %}
+                        {% for ticket in p %}
+                          <tr>
+                            <td>
+                              <a href="{% url ticket_list ticket.projects_id, ticket.id %}">{{ ticket.name }}</a>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                      {% else %}
+                        <td>
+                          <p class="muted">You have no tickets.</p>
+                        </td>
+                      {% endif %}
+                    {% endwith %}                 
+                </div>
+                {% endif %}
+                <div class="span9">         
+                  {% block content %}
+                      AMPTA
+                  {% endblock %}
+                </div>
+            </div>
+        </div>
+      <footer>
+      </footer>
+
+    </div> <!-- /container -->
+    <script src="{{ STATIC_URL }}css/bootstrap/js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-transition.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-button.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-typeahead.js"></script>
+  </body>
+</html>

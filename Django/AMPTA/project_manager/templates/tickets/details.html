@@ -1,0 +1,33 @@
+{% extends 'shared/base.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    Specific project
+{% endblock %}
+
+{% block content %}
+    
+        <div class="project">
+            <h3>{{ ticket.name }}</h3>
+            
+            <p><bold>Description: </bold><span>{{ ticket.description }}</span></p>
+            
+            <p><bold>Created at: </bold><span>{{ ticket.start_date|date:"Y-m-d" }}</span></p>
+            <p><bold>Last edited: </bold><span>{{ ticket.end_date|date:"Y-m-d" }}</span></p>
+            <p><bold>Status: </bold><span>{{ ticket.statuses }}</span></p>        
+            
+        </div>
+            <div class="input-append">
+              <div class="btn-group">
+                <button class="btn dropdown-toggle btn-inverse dropproject" data-toggle="dropdown">
+                  Ticket options
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url ticket_edit project.id ticket.id %}" >Edit</a></li>
+                  <li><a href="{% url ticket_delete project.id ticket.id %}">Delete</a></li>
+                </ul>
+              </div>
+              
+            </div>
+{% endblock %}

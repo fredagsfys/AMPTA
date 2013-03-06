@@ -1,0 +1,52 @@
+{% extends 'shared/base.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    List of projects
+{% endblock %}
+
+{% block content %}
+	{% include 'projects/_search.html' %}
+    <h2>All projects</h2>
+    
+    {% for project in projects %}
+        <div class="project">
+        	<table>
+        		{% if project|owner:user and project|member:user %}
+	        		<td class="projectCell">
+	            		<a href="{% url project_list_with_ticket project.id %}">{{ project }}</a>
+					</td>
+					<td>
+						<span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
+					</td>
+					<td>
+						<span class="memberProject"><i class="icon-ok-sign"></i>Member</span>
+					</td>
+				{% elif project|owner:user %}
+					<td class="projectCell">
+						<a href="{% url project_list_with_ticket project.id %}">{{ project }}</a>
+					</td>
+					<td>
+						<span class="yourProject"><i class="icon-ok-sign"></i>Admin</span>
+					</td>
+				{% elif project|member:user %}
+
+					<td class="projectCell">
+						<a href="{% url project_list_with_ticket project.id %}">{{ project }}</a>
+					</td>
+
+					<td>
+						<span class="memberProject"><i class="icon-ok-sign"></i>Member</span>
+					</td>
+				{% else %}
+					<td class="projectCell">
+					<span class="muted">{{ project }}</span>
+					</td>
+					<td>
+						<span class="noProject"><i class="icon-remove-circle"></i>Not authorized</span>
+					</td>
+				{% endif %}
+        	</table>
+        </div>
+    {% endfor %}
+{% endblock %}
